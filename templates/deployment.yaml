@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploymentweb
+  labels:
+    app: {{ .Values.labels.app }}
+spec:
+  replicas: {{ .Values.spec.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.labels.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.labels.app }}
+    spec:
+      volumes:
+      - name: pvcweb
+        persistentVolumeClaim:
+          claimName: pvc-piyapan
+      - name: nginx-conf
+        configMap:
+          name: nginx-config-index
+          items:
+            - key: mysqldump.cnf
+              path: mysqldump.cnf
+      containers:
+      - name: webpiyapan
+        image: {{ .Values.containers.image }}
+        ports:
+        - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+              - name: Host
+                value: piyapan.k8s.lab
+            path: /index
+            port: 3000
+          periodSeconds: 2
+        resources:
+          limits:
+            memory: {{ .Values.limits.memory }}
+            cpu: {{ .Values.limits.cpu }}
+          requests:
+            memory: {{ .Values.limits.memory }}
+            cpu: {{ .Values.limits.cpu }}
+        volumeMounts:
+          - mountPath: /etc/mysql/conf.d
+            readOnly: true
+            name: nginx-conf
+          - name: pvcweb
+            mountPath: /apps/storage
+
+
+            
+         
+        

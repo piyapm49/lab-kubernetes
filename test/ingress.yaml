@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ing-web
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: "piyapan.k8s.lab"
+    http:
+      paths:
+      - pathType: Prefix
+        backend:
+          service:
+            name: svc-custerip
+            port:
+              number: 3000
+        path: /index

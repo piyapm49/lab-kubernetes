@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1(align="center") Welcome to Piyapan
+  form.form-inline(align="center" method="post" action="/index")
+      input.form-control(type="text" name="value" placeholder="Value" maxlength=32)
+      button.btn.btn-success(type="submit" id="create") Submit
+  br
+  
+  p(align="center")= a1
