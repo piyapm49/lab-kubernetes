@@ -25,4 +25,4 @@ jobs:
           context: .
           file: images/Dockerfile
           push: true
-          tags: piyapanker/nodeweb:4.0
+          tags: piyapanker/nodeweb:5.0
