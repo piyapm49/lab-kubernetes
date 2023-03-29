@@ -25,4 +25,4 @@ jobs:
           context: .
           file: images/Dockerfile
           push: true
-          tags: piyapanker/nodeweb:6.0
+          tags: piyapanker/nodeweb:${{ github.run_number }}
