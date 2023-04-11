@@ -33,6 +33,6 @@ jobs:
       - name: showlist
         run: pwd
       - name: cd
-        run: cd test
+        run: cd test/
       - name: deploy
         run: kubectl apply -f deployment.yaml
