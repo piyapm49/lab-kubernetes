@@ -37,7 +37,9 @@ jobs:
          ls
          cd test
          ls
-      - name: deploy
+      - name: minikube start
         run: |
          minikube start
          kubectl get node
+      - name : deploy
+        run: kubectl apply -f deployment.yaml
