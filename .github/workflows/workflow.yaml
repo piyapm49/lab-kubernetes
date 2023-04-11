@@ -28,7 +28,7 @@ jobs:
   #         tags: piyapanker/nodeweb:${{ github.run_number }} 
   
   deploy:
-    needs: build
+    # needs: build
     runs-on: self-hosted
     steps:
       - name: minikubestart
