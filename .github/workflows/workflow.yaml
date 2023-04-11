@@ -38,4 +38,6 @@ jobs:
          cd test
          ls
       - name: deploy
-        run: kubectl apply -f deployment.yaml
+        run: |
+         minikube start
+         kubectl get node
