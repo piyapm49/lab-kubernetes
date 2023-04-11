@@ -38,6 +38,5 @@ jobs:
       - name: showlist
         run: |
           ls -la
-          cd test
       - name : deploytest
-        run: kubectl apply -f deployment.yaml
+        run: kubectl apply -f test/deployment.yaml
