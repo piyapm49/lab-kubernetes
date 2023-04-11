@@ -1,6 +1,12 @@
 name: piyapan-lab
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'input your software version'
+        required: true
+        default: '2.0'
+        type: string
 
 jobs:
   build:
@@ -26,17 +32,25 @@ jobs:
           file: images/Dockerfile
           push: true
           tags: piyapanker/nodeweb:${{ github.run_number }} 
-  
-  deploy:
+
+  prepare:
     needs: build
     runs-on: self-hosted
     steps:
-      - name: minikubestart
-        run: |
-         minikube start
-         kubectl get node
-      - name: showlist
-        run: |
-          ls -la
-      - name : deploytest
-        run: kubectl apply -f test/deployment.yaml
+      - name: Set Tag on Workflow Dispatch
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "${{ github.event.inputs.tag }}"
+  
+  # deploy:
+  #   needs: prepare
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: minikubestart
+  #       run: |
+  #        minikube start
+  #        kubectl get node
+  #     - name: showlist
+  #       run: |
+  #         ls -la
+  #     - name : deploytest
+  #       run: kubectl apply -f test/deployment.yaml
