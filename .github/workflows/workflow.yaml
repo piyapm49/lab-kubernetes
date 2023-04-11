@@ -39,7 +39,7 @@ jobs:
     steps:
       - name: Set Tag on Workflow Dispatch
         if: github.event_name == 'workflow_dispatch'
-        run: echo "${{ github.event.inputs.tag }}"
+        run: echo "${{ github.event.inputs.version }}"
   
   # deploy:
   #   needs: prepare
