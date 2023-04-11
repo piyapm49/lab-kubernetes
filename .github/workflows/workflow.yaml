@@ -9,7 +9,15 @@ on:
         type: string
 
 jobs:
+  prepare:
+  runs-on: self-hosted
+  steps:
+    - name: Set Tag on Workflow Dispatch
+      if: github.event_name == 'workflow_dispatch'
+      run: echo "${{ github.event.inputs.version }}"
+
   build:
+    needs: prepare
     runs-on: self-hosted
     steps:
       -
@@ -31,15 +39,11 @@ jobs:
           context: .
           file: images/Dockerfile
           push: true
-          tags: piyapanker/nodeweb:${{ github.run_number }} 
+          tags: piyapanker/nodeweb:${{ github.event.inputs.version }} 
 
-  prepare:
-    needs: build
-    runs-on: self-hosted
-    steps:
-      - name: Set Tag on Workflow Dispatch
-        if: github.event_name == 'workflow_dispatch'
-        run: echo "${{ github.event.inputs.version }}"
+          #  tags: piyapanker/nodeweb:${{ github.run_number }} 
+
+
   
   # deploy:
   #   needs: prepare
