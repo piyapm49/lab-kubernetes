@@ -34,5 +34,7 @@ jobs:
         run: pwd
       - name: cd
         run: cd test/
-      - name: deploy
-        run: kubectl apply -f deployment.yaml
+      - name: showlist
+        run: ls -la
+      # - name: deploy
+      #   run: kubectl apply -f deployment.yaml
