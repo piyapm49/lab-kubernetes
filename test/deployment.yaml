@@ -26,7 +26,7 @@ spec:
       #         path: mysqldump.cnf
       containers:
       - name: webpiyapan
-        image: piyapanker/nodeweb:2.0
+        image: piyapanker/nodeweb
         ports:
         - containerPort: 3000
         # readinessProbe:
