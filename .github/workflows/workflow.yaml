@@ -26,3 +26,9 @@ jobs:
           file: images/Dockerfile
           push: true
           tags: piyapanker/nodeweb:${{ github.run_number }}
+  
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
