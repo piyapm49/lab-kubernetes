@@ -31,10 +31,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: showlist
-        run: pwd
-      - name: cd
-        run: cd test/
-      - name: showlist
-        run: ls -la
+        run: |
+         pwd
+         ls
+         cd test
+         ls
+
       # - name: deploy
       #   run: kubectl apply -f deployment.yaml
