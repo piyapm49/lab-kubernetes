@@ -28,6 +28,7 @@ jobs:
           tags: piyapanker/nodeweb:${{ github.run_number }} 
   
   deploy:
+    needs: build
     runs-on: self-hosted
     steps:
       - name: showlist
@@ -36,6 +37,5 @@ jobs:
          ls
          cd test
          ls
-
-      # - name: deploy
-      #   run: kubectl apply -f deployment.yaml
+      - name: deploy
+        run: kubectl apply -f deployment.yaml
