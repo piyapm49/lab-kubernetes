@@ -7,6 +7,8 @@ on:
         required: true
         default: '2.0'
         type: string
+env:
+  IMAGES_TAG: ${{ github.event.inputs.version }}
 
 jobs:
   prepare:
@@ -40,21 +42,17 @@ jobs:
           file: images/Dockerfile
           push: true
           tags: piyapanker/nodeweb:${{ github.event.inputs.version }} 
-
           #  tags: piyapanker/nodeweb:${{ github.run_number }} 
-
-
-  
-  # deploy:
-  #   needs: prepare
-  #   runs-on: self-hosted
-  #   steps:
-  #     - name: minikubestart
-  #       run: |
-  #        minikube start
-  #        kubectl get node
-  #     - name: showlist
-  #       run: |
-  #         ls -la
-  #     - name : deploytest
-  #       run: kubectl apply -f test/deployment.yaml
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: minikubestart
+        run: |
+         minikube start
+         kubectl get node
+      - name: showlist
+        run: |
+          ls -la
+      - name : deploytest
+        run: kubectl apply -f test/deployment.yaml
