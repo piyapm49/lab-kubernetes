@@ -33,4 +33,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: clone
-        uses: git clone https://github.com/piyapm49/lab-kubernetes.git
+        run: git clone https://github.com/piyapm49/lab-kubernetes.git
