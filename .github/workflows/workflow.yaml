@@ -10,11 +10,11 @@ on:
 
 jobs:
   prepare:
-  runs-on: self-hosted
-  steps:
-    - name: Set Tag on Workflow Dispatch
-      if: github.event_name == 'workflow_dispatch'
-      run: echo "${{ github.event.inputs.version }}"
+   runs-on: self-hosted
+   steps:
+     - name: Set Tag on Workflow Dispatch
+       if: github.event_name == 'workflow_dispatch'
+       run: echo "${{ github.event.inputs.version }}"
 
   build:
     needs: prepare
