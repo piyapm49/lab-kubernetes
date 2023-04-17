@@ -1,12 +1,12 @@
 name: piyapan-lab
 on:
   workflow_dispatch:
-    inputs:
-      version:
-        description: 'input your software version'
-        required: true
-        default: '2.0'
-        type: string
+    # inputs:
+    #   version:
+    #     description: 'input your software version'
+    #     required: true
+    #     default: '2.0'
+    #     type: string
 env:
   IMAGES_TAG: ${{ github.event.inputs.version }}
 
