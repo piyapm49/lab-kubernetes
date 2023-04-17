@@ -7,8 +7,8 @@ on:
     #     required: true
     #     default: '2.0'
     #     type: string
-env:
-  IMAGES_TAG: ${{ github.event.inputs.version }}
+# env:
+#   IMAGES_TAG: ${{ github.event.inputs.version }}
 
 jobs:
   # prepare:
@@ -48,6 +48,8 @@ jobs:
     runs-on: piyapan
     steps:
       - name: root
-        run: su -
-      - name: pass
-        run: root
+        run: |
+          su -
+          root
+
+
