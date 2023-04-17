@@ -12,7 +12,7 @@ env:
 
 jobs:
   prepare:
-   runs-on: self-hosted
+   runs-on: piyapan
    steps:
      - name: Set Tag on Workflow Dispatch
        if: github.event_name == 'workflow_dispatch'
@@ -20,7 +20,7 @@ jobs:
 
   build:
     needs: prepare
-    runs-on: self-hosted
+    runs-on: piyapan
     steps:
       -
         name: Checkout
@@ -45,14 +45,11 @@ jobs:
           #  tags: piyapanker/nodeweb:${{ github.run_number }} 
   deploy:
     needs: build
-    runs-on: self-hosted
+    runs-on: piyapan
     steps:
-      - name: minikubestart
-        run: |
-         minikube start
-         kubectl get node
+      - name: root
+        run: su -
+        with: root
       - name: showlist
         run: |
           ls -la
-      - name : deploytest
-        run: kubectl apply -f test/deployment.yaml
