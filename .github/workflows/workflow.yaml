@@ -47,10 +47,5 @@ jobs:
     needs: build
     runs-on: piyapan
     steps:
-      - name: access
-        run: |
-          cd test/
-          ls -la
-          kubectl get node
-          kubectl get pod
-          kubectl apply -f deployment.yaml
+      - name: helm
+        run: helm upgrade -i workshoppiyapan -f ./values.yaml .

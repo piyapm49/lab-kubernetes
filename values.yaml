@@ -4,7 +4,7 @@ spec:
   replicas: 1
 
 containers:
-    image: piyapanker/nodeweb:2.0
+    image: piyapanker/nodeweb
 
 limits:
   memory: "512Mi"
