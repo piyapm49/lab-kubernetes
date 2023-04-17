@@ -48,7 +48,6 @@ jobs:
     runs-on: piyapan
     steps:
       - name: root
-        run: |
-          whoami
-          su -
-          root
+        uses: su -
+        with:
+          password: root
