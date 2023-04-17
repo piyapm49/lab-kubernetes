@@ -47,10 +47,11 @@ jobs:
     needs: build
     runs-on: piyapan
     steps:
-      - name: showlist
-        run: ls -la
-      # - name: apply
-      #   run: kubectl apply -f deployment.yaml
+      - name: access and kubectl apply
+        run: |
+        cd /test
+        kubectl apply -f deployment.yaml
+
 
 
 
