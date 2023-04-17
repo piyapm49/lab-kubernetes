@@ -48,8 +48,9 @@ jobs:
     runs-on: piyapan
     steps:
       - name: root
-        run: su -
-        with: root
+        run: |
+          su -
+          root
       - name: showlist
         run: |
           ls -la
