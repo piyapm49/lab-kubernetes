@@ -18,40 +18,38 @@ jobs:
        if: github.event_name == 'workflow_dispatch'
        run: echo "${{ github.event.inputs.version }}"
 
-  build:
-    needs: prepare
-    runs-on: piyapan
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v3
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: piyapanker
-          password: ${{ secrets.DOCKER_PIYAPAN }}
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: images/Dockerfile
-          push: true
-          tags: piyapanker/nodeweb:${{ github.event.inputs.version }} 
-          #  tags: piyapanker/nodeweb:${{ github.run_number }} 
+  # build:
+  #   needs: prepare
+  #   runs-on: piyapan
+  #   steps:
+  #     -
+  #       name: Checkout
+  #       uses: actions/checkout@v3
+  #     -
+  #       name: Login to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: piyapanker
+  #         password: ${{ secrets.DOCKER_PIYAPAN }}
+  #     -
+  #       name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
+  #     -
+  #       name: Build and push
+  #       uses: docker/build-push-action@v4
+  #       with:
+  #         context: .
+  #         file: images/Dockerfile
+  #         push: true
+  #         tags: piyapanker/nodeweb:${{ github.event.inputs.version }} 
+  #         #  tags: piyapanker/nodeweb:${{ github.run_number }} 
   deploy:
-    needs: build
+    # needs: build
     runs-on: piyapan
     steps:
       - name: access
-        run: cd test/
+        run: |
+          cd test/
+          ls -la
       - name: kubectl apply
-        run: kubectl apply -f deployment.yaml
-
-
-
-
+        run: kubectl get node
