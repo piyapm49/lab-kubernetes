@@ -1,8 +1,15 @@
 name: Lab-Piyapan
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'input your software version'
+        required: true
+        default: '1.0.0'
+        type: string
+  # push:
+  #   branches:
+  #     - main
 env:
   WORDING: "Piyapan"
 jobs:
@@ -12,8 +19,7 @@ jobs:
       image-version: ${{ steps.create-variable.outputs.image-version }}
     steps:
       - name: check github environment
-        run: hostname
-      
+        run: hostname      
       - name: create-variable
         id: create-variable
         run: |
@@ -21,6 +27,7 @@ jobs:
           echo "::set-output name=image-version::prod-1.0.0"
       - name: build application
         run: echo "build for ${{ env.WORDING }} by $BUILD_ARGS "
+
   deploy: 
     runs-on: self-hosted
     needs: build
