@@ -12,7 +12,7 @@ jobs:
       - name: check github environment
         run: hostname
       - name: build appilcation
-        run: echo "hello {{ env.WORDING }}"
+        run: echo "hello ${{ env.WORDING }}"
 
   deploy: 
     runs-on: piyapan
