@@ -13,9 +13,9 @@ jobs:
       - name: check github environment
         run: hostname
       - name: create
-        run: echo "Piyapan version 1.0.2" >> $GITHUB_ENV
+        run: echo "BUILD_ARGS=Piyapan version 1.0.2" >> $GITHUB_ENV
       - name: build appilcation
-        run: echo "hello ${{ env.WORDING }} by $GITHUB_ENV"
+        run: echo "hello ${{ env.WORDING }} by $BUILD_ARGS"
 
   deploy: 
     runs-on: piyapan
