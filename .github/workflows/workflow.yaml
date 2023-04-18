@@ -49,3 +49,4 @@ jobs:
     steps:
       - name: helm
         run: helm upgrade -i workshoppiyapan -f ./values.yaml .
+#test
