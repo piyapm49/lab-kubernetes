@@ -3,12 +3,17 @@ on:
   push:
     branches:
       - main
+env:
+  WORDING: "PIYAPAN"
 jobs:
   build: 
     runs-on: ubuntu-latest
     steps:
       - name: check github environment
         run: hostname
+      - name: build appilcation
+        run: echo "hello {{ env.WORDING }}"
+
   deploy: 
     runs-on: piyapan
     steps:
