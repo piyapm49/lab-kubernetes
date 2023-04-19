@@ -21,8 +21,10 @@ jobs:
       image-version: ${{ steps.create-variable.outputs.image-version }}
       developer: ${{ github.actor }}
     steps:
+    
       - name: check github environment
-        run: hostname     
+        run: hostname
+      
       - name: create-variable
         id: create-variable
         run: |
@@ -36,7 +38,16 @@ jobs:
     needs: build
     if: ${{ always() }}
     steps:
+      - name: wait for Approve    
+        uses: trstringer/manual-approval@v1
+        id: check-approval
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: "piyapan, manowpsr"
+          minimum-approvals: 1
+
       - name: check github environment
         run: hostname
+        
       - name: deploy app
-        run: echo "deploying app version ${{ needs.build.outputs.image-version}} Developer by ${{ needs.build.outputs.developer }}"   
+        run: echo "deploying app version ${{ needs.build.outputs.image-version}} Developer by ${{ needs.build.outputs.developer }}" 
