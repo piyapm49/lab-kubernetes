@@ -12,14 +12,17 @@ on:
   #     - main
 env:
   WORDING: "Piyapan"
+
 jobs:
   build: 
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_dispatch' }}
     outputs:
       image-version: ${{ steps.create-variable.outputs.image-version }}
+      developer: ${{ github.actor }}
     steps:
       - name: check github environment
-        run: hostname      
+        run: hostname     
       - name: create-variable
         id: create-variable
         run: |
@@ -31,8 +34,9 @@ jobs:
   deploy: 
     runs-on: self-hosted
     needs: build
+    if: ${{ always() }}
     steps:
       - name: check github environment
         run: hostname
       - name: deploy app
-        run: echo "deploying app version ${{ needs.build.outputs.image-version}}"
+        run: echo "deploying app version ${{ needs.build.outputs.image-version}} Developer by ${{ needs.build.outputs.developer }}"   
