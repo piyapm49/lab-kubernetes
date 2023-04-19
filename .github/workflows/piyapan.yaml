@@ -42,7 +42,7 @@ jobs:
         uses: trstringer/manual-approval@v1
         id: check-approval
         with:
-          secret: ${{ github.TESTTOKEN }}
+          secret: ${{ github.TOKEN }}
           approvers: "piyapm49, manowpsr"
           minimum-approvals: 1
 
