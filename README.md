@@ -1,1 +1,2 @@
-# lab-kubernetes piyapan TC
+# React : frontend
+# Node js : backend
