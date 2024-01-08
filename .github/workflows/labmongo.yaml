@@ -80,11 +80,11 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Run a script 1
-      if: ${{ github.event.inputs.version == 'version-4' || github.event.inputs.namespace_prefix == 'mychannel' }} 
+      if: ${{ github.event.inputs.version == 'version-4' && github.event.inputs.namespace_prefix == 'mychannel' }} 
       run: |
         echo "Running the workflow1 with parameter: ${{ github.event.inputs.env }}-${{ github.event.inputs.namespace_prefix }}-${{ github.event.inputs.repo }}-${{ github.event.inputs.version }}"
     
     - name: Run a script 2
-      if: ${{ github.event.inputs.version == 'version-5' ||  github.event.inputs.namespace_prefix == 'mcadm' }} 
+      if: ${{ github.event.inputs.version == 'version-5' &&  github.event.inputs.namespace_prefix == 'mcadm' }} 
       run: |
         echo "Running the workflow2 with parameter: ${{ github.event.inputs.env }}-${{ github.event.inputs.namespace_prefix }}-${{ github.event.inputs.repo }}-${{ github.event.inputs.version }}"
