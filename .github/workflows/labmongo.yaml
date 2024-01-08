@@ -1,82 +1,21 @@
-name: Common MongoDB Connection Deploy
+name: Manual Workflow
 
 on:
   workflow_dispatch:
     inputs:
-      env:
-        type: choice
-        description: Environment
+      parameter_name:
+        description: 'Description of the parameter'
         required: true
-        default: "dev"
-        options:
-          - dev
-          - sit
-          - sit2
-          - uat
-      namespace_prefix:
-        type: choice
-        description: Namespace Prefix to Deploy
-        required: true
-        default: "mychannel"
-        options:
-          - mychannel
-          - mcadm
-          - mcoffline
-          - newmcadm
-      repo:
-        type: choice
-        description: Repository to build
-        required: true
-        options:
-          - mychannel-frontend-web
-          - mychannel-service-ais-fibre
-          - mychannel-service-authentication
-          - mychannel-service-customer-portal
-          - mychannel-service-easy-app
-          - mychannel-service-eclaim
-          - mychannel-service-face-recognition-portal
-          - mychannel-service-fbb-portal
-          - mychannel-service-improvement
-          - mychannel-service-mychannel-new-login
-          - mychannel-service-mychannel-payments
-          - mychannel-service-nas-gateway
-          - mychannel-service-pos-airport
-          - mychannel-service-reliability
-          - mychannel-service-sales-portal
-          - mychannel-service-sales-wall
-          - mychannel-service-admin
-          - mychannel-service-offline
-          - mychannel-service-reliability-offline
-          - mychannel-mock
-          - mychannel-service-ais-fibre-portal
-          - mychannel-service-app3step-portal
-          - mychannel-service-device-sales
-          - mychannel-service-kyc
-          - mychannel-service-mcadm
-          - mychannel-service-provisioning
-          - mychannel-service-sale-payment
-          - mychannel-service-sale-cart
-          - mychannel-service-sale-store
-          - mychannel-service-sale-batch
-          - mychannel-service-sale-process-manager
-          - mychannel-service-sale-care
-          - mychannel-service-sale-package
-          - mychannel-service-sale-device-sales
-      version:
-        type: choice
-        description: Version MongoDB
-        required: true
-        default: "version-4"
-        options:
-          - version-4
-          - version-5
+        default: 'Default value'
 
 jobs:
-  deploy-config:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout pipelines
-        uses: actions/checkout@v3
-        
-      - name: "Secrets substitution for service"
-        run: echo "${{ github.event.input.env }}-${{ github.event.input.namespace_prefix }}-${{ github.event.input.repo }}-${{ github.event.input.version }}"
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Run a script
+      run: |
+        echo "Running the workflow with parameter: ${{ github.event.inputs.parameter_name }}"
