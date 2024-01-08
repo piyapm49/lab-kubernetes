@@ -74,8 +74,6 @@ on:
 jobs:
   deploy-config:
     runs-on: ubuntu-latest
-    name: Deploy ${{ github.event.inputs.namespace_prefix }}-${{ github.event.inputs.env }} Config
     steps:
       - name: "Secrets substitution for service"
-        if: ${{ github.event.inputs.namespace_prefix == 'mychannel' || github.event.inputs.namespace_prefix == 'mcadm' || github.event.inputs.namespace_prefix == 'newmcadm' || github.event.inputs.namespace_prefix == 'mcoffline' }}
-        run: echo ${{ github.event.input.env }}-${{ github.event.input.namespace_prefix }}-${{ github.event.input.repo }}-${{ github.event.input.version }}
+        run: echo "${{ github.event.input.env }}-${{ github.event.input.namespace_prefix }}-${{ github.event.input.repo }}-${{ github.event.input.version }}"
