@@ -73,6 +73,7 @@ on:
 
 jobs:
   deploy-config:
+    runs-on: ubuntu-latest
     name: Deploy ${{ github.event.inputs.namespace_prefix }}-${{ github.event.inputs.env }} Config
     steps:
       - name: "Secrets substitution for service"
