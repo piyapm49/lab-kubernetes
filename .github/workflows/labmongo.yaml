@@ -75,5 +75,8 @@ jobs:
   deploy-config:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout pipelines
+        uses: actions/checkout@v3
+        
       - name: "Secrets substitution for service"
         run: echo "${{ github.event.input.env }}-${{ github.event.input.namespace_prefix }}-${{ github.event.input.repo }}-${{ github.event.input.version }}"
