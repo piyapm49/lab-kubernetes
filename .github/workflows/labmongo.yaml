@@ -3,10 +3,16 @@ name: Manual Workflow
 on:
   workflow_dispatch:
     inputs:
-      parameter_name:
-        description: 'Description of the parameter'
+      env:
+        type: choice
+        description: Environment
         required: true
-        default: 'Default value'
+        default: "dev"
+        options:
+          - dev
+          - sit
+          - sit2
+          - uat
 
 jobs:
   build:
@@ -18,4 +24,4 @@ jobs:
 
     - name: Run a script
       run: |
-        echo "Running the workflow with parameter: ${{ github.event.inputs.parameter_name }}"
+        echo "Running the workflow with parameter: ${{ github.event.inputs.env }}"
